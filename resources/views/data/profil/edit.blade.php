@@ -1,7 +1,7 @@
 @extends('layouts.dashboard_template')
 
 @section('content')
-        <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         {{ $page_title ?? "Page Title" }}
@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('data.profil.index')}}">Profil</a></li>
-        <li class="active">{{$page_title}}</li>
+        <li class="active">{{ $page_title }}</li>
     </ol>
 </section>
 
@@ -73,9 +73,67 @@
 @push('scripts')
 <script>
     $(function () {
-        $('#kecamatan_id').select2({
-            placeholder: "Pilih Kecamatan",
-            allowClear: true
+
+        const tracker_host = 'http://localhost:8080/track';
+        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6bnVsbCwidGltZXN0YW1wIjoxNjAzNDY2MjM5fQ.HVCNnMLokF2tgHwjQhSIYo6-2GNXB4-Kf28FSIeXnZw';
+
+        $('#list_provinsi').select2();
+        $.ajax({
+            type: 'GET',
+            url: tracker_host + '/index.php/api/wilayah/list_wilayah?token=' + token,
+            dataType: 'json',
+            success: function(data) {
+                var html = '';
+                var i;
+                for(i=0; i<data.length; i++) {
+                    html += '<option value="' + data[i].kode_prov + '" data-nama="' + data[i].nama_prov + '">' + data[i].nama_prov + '</option>';
+                }
+                $('#list_provinsi').html(html);
+            }
+        });
+
+        $('#list_kabupaten').select2();
+        $("#list_provinsi").change(function () {
+
+            var provinsi = $('#list_provinsi').data('nama');
+            $('#nama_provinsi').val(provinsi);
+
+            alert(provinsi);
+
+            $.ajax({
+                type: 'GET',
+                url: tracker_host + '/index.php/api/wilayah/list_wilayah?token=' + token + '&provinsi=' + provinsi,
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.length; i++) {
+                        html += '<option value="' + data[i].kode_kab + '" data-nama="' + data[i].nama_kab + '">'+data[i].nama_kab + '</option>';
+                    }
+                    $('#list_kabupaten').html(html);
+                }
+            });
+        });
+
+        $('#list_kecamatan').select2();
+        $("#list_kabupaten").change(function () {
+
+            var kabupaten = $('#list_kabupaten').data('nama');
+            $('#nama_kabupaten').val(kabupaten);
+
+            $.ajax({
+                type: 'GET',
+                url: tracker_host + '/index.php/api/wilayah/list_wilayah?token=' + token + '&provinsi=' + provinsi,
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.length; i++) {
+                        html += '<option value="' + data[i].kode_kec + '"data-nama="' + data[i].nama_kec + '">'+data[i].nama_kec + '</option>';
+                    }
+                    $('#list_kecamatan').html(html);
+                }
+            });
         });
 
         function readURL(input) {
@@ -117,8 +175,8 @@
         $("#file_struktur").change(function () {
             readURL(this);
         });
-
-      $("#foto_kepala_wilayah").change(function () {
+        
+        $("#foto_kepala_wilayah").change(function () {
             readURL2(this);
         });
 

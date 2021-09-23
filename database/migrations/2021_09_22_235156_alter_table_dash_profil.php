@@ -24,12 +24,10 @@ class AlterTableDashProfil extends Migration
         });
 
         // Isi data
-        $data = Profil::where('kecamatan_id', config('app.default_profile'))->first();
-
         $profil = Profil::find(1);
-        $profil->nama_provinsi = $data->nama_provinsi;
-        $profil->nama_kabupaten = $data->nama_kabupaten;
-        $profil->nama_kecamatan = $data->nama_kecamatan;
+        $profil->nama_provinsi = DB::table('ref_wilayah')->where('provinsi_id', $profil->provinsi_id)->first()->nama;
+        $profil->nama_kabupaten = DB::table('ref_wilayah')->where('kabupaten_id', $profil->kabupaten_id)->first()->nama;
+        $profil->nama_kecamatan = DB::table('ref_wilayah')->where('kecamatan_id', $profil->kecamatan_id)->first()->nama;
         $profil->update();
     }
 

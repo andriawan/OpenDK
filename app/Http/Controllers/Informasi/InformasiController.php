@@ -38,13 +38,13 @@ use function view;
 class InformasiController extends Controller
 {
     /**
-     * Menampilkan Kumpulan Prosedur
+     * Menampilkan Daftar Prosedur
      **/
 
     public function showProsedur()
     {
-        $data['page_title']       = 'Kumpulan Prosedur ';
-        $data['page_description'] = 'Kumpulan Prosedur ';
+        $data['page_title']       = 'Daftar Prosedur ';
+        $data['page_description'] = 'Daftar Prosedur ';
 
         return view('Informasi.prosedur')->with($data);
     }

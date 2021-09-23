@@ -61,7 +61,7 @@ class KesehatanController extends Controller
 
         $defaultProfil    = config('app.default_profile');
         $page_title       = 'Kesehatan';
-        $page_description = 'Data Kesehatan ' .$this->sebutan_wilayah;
+        $page_description = 'Data Kesehatan';
         $year_list        = years_list();
         $list_desa        = DB::table('das_data_desa')->select('*')->where('kecamatan_id', '=', $defaultProfil)->get();
         return view('pages.kesehatan.show_kesehatan', compact('page_title', 'page_description', 'defaultProfil', 'year_list', 'list_desa'));

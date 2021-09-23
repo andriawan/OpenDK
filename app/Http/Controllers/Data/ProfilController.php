@@ -40,8 +40,8 @@ use function back;
 use function basename;
 use function compact;
 
-use function config;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use function is_img;
@@ -52,12 +52,21 @@ use function request;
 use function strtolower;
 use function strval;
 use function substr;
+
 use function ucwords;
 
 use function view;
 
 class ProfilController extends Controller
 {
+    protected $client;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->client = new Client();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -65,16 +74,56 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        $profil = Profil::where('kecamatan_id', config('app.default_profile'))->first();
+        // $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6bnVsbCwidGltZXN0YW1wIjoxNjAzNDY2MjM5fQ.HVCNnMLokF2tgHwjQhSIYo6-2GNXB4-Kf28FSIeXnZw';
 
-        $profil->file_struktur_organisasi = is_img($profil->file_struktur_organisasi);
-        $profil->file_logo                = is_img($profil->file_logo);
-        $profil->foto_kepala_wilayah                = is_img($profil->foto_kepala_wilayah);
+        // // $response = $client->request('GET', 'http://localhost:8080/track/index.php/api/wilayah/list_wilayah', $options);
+
+
+
+        // try {
+        //     $response = $this->client->get('http://localhost:8080/track/index.php/api/wilayah/list_wilayah', [
+        //         'query' => [
+        //             'token' => $token,
+        //             // 'provinsi' => 'SULAWESI SELATAN',
+        //             // 'kabupaten' => 'WAJO',
+        //             // 'kecamatan' => 'PITUMPANUA',
+        //         ]
+        //     ]);
+
+        //     if ($response->getStatusCode() === 200) {
+        //         $response = json_decode($response->getBody(), true);
+        //     }
+        // } catch (RequestException $e) {
+        //     $response = $e->getResponse();
+        // }
+
+
+        // dd ($response);
+
+        // $result = $res->getBody();
+
+        // $profil = Profil::find(1);
+        // $profil->nama_provinsi = $data->nama_provinsi;
+        // $profil->nama_kabupaten = $data->nama_kabupaten;
+        // $profil->nama_kecamatan = $data->nama_kecamatan;
+        // $profil->update();
+
+        // echo $result;
+        $profil = $this->profil;
+
+        $profil->file_struktur_organisasi = is_img($this->profil->file_struktur_organisasi);
+        $profil->file_logo                = is_img($this->profil->file_logo);
+        $profil->foto_kepala_wilayah      = is_img($this->profil->foto_kepala_wilayah);
 
         $page_title       = 'Ubah Profil';
-        $page_description =   ucwords(strtolower($this->sebutan_wilayah).' : ' . $profil->kecamatan->nama);
-        // dd($profil);
+        $page_description = ucwords(strtolower($this->sebutan_wilayah).' : ' . $this->profil->namae_kecamatan);
         return view('data.profil.edit', compact('page_title', 'page_description', 'profil'));
+
+        // $profil = Profil::find(1);
+        // $profil->nama_provinsi = DB::table('ref_wilayah')->where('provinsi_id', $profil->provinsi_id)->first()->nama;
+        // $profil->nama_kabupaten = DB::table('ref_wilayah')->where('kabupaten_id', $profil->kabupaten_id)->first()->nama;
+        // $profil->nama_kecamatan = DB::table('ref_wilayah')->where('kecamatan_id', $profil->kecamatan_id)->first()->nama;
+        // $profil->update();
     }
 
     /**
@@ -85,7 +134,7 @@ class ProfilController extends Controller
     public function create()
     {
         $page_title       = 'Tambah';
-        $page_description = 'Tambah Profil ' .$this->sebutan_wilayah;
+        $page_description = 'Tambah Profil';
         $profil           = new Profil();
 
         return view('data.profil.create', compact('page_title', 'page_description', 'profil'));
@@ -182,7 +231,7 @@ class ProfilController extends Controller
             $profil->file_struktur_organisasi = 'http://placehold.it/600x400';
         }
         $page_title       = 'Ubah';
-        $page_description = 'Ubah Profil Kecamatan: ' . ucwords(strtolower($profil->kecamatan->nama));
+        $page_description = 'Ubah Profil Kecamatan';
 
         return view('data.profil.edit', compact('page_title', 'page_description', 'profil'));
     }

@@ -66,7 +66,7 @@ class ToiletSanitasiController extends Controller
     public function index()
     {
         $page_title       = 'Toilet & Sanitasi';
-        $page_description = 'Data Toilet & Sanitasi ' . $this->sebutan_wilayah. ' ' .$this->nama_wilayah;
+        $page_description = 'Data Toilet & Sanitasi';
         return view('data.toilet_sanitasi.index', compact('page_title', 'page_description'));
     }
 

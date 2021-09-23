@@ -24,10 +24,19 @@
         <input accept="image/*, application/pdf" type="file" id="file_regulasi" name="file_regulasi" class="form-control" @if(isset($regulasi->file_regulasi)) required @else {{ " " }}@endif>
        <br>
 
-            <img class="hide" src="@if(isset($regulasi->file_regulasi)) {{ asset($regulasi->file_regulasi) }} @else {{ "http://placehold.it/1000x600" }} @endif"  id="showgambar"
-             style="max-width:400px;max-height:250px;float:left;"/>
+        @if(isset($regulasi->file_regulasi) && $regulasi->mime_type != 'pdf')
+            <img class="" src="@if(isset($regulasi->file_regulasi)) {{ asset($regulasi->file_regulasi) }} @else {{ "http://placehold.it/1000x600" }} @endif" id="showgambar" style="max-width:400px;max-height:250px;float:left;"/>
+        @endif
 
-            <object data="" type="application/pdf" width="500" height="400" class="hide" id="showpdf"> </object>
+        @if(isset($regulasi->file_regulasi) && $regulasi->mime_type == 'pdf')
+            <object data="@if(isset($regulasi->file_regulasi)) {{ asset($regulasi->file_regulasi) }} @endif" type="application/pdf" width="500" height="400" class="" id="showpdf"> </object>
+        @endif
+
+
+            <img class="hide" src="@if(isset($regulasi->file_regulasi)) {{ asset($regulasi->file_regulasi) }} @else {{ "http://placehold.it/1000x600" }} @endif"  id="showgambar" style="max-width:400px;max-height:250px;float:left;"/>
+
+            <object data="@if(isset($regulasi->file_regulasi)) {{ asset($regulasi->file_regulasi) }} @endif" type="application/pdf" width="500" height="400" class="hide" id="showpdf"> </object>
+
     </div>
 </div>
 

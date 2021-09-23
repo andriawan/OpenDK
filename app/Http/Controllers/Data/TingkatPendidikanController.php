@@ -57,7 +57,7 @@ class TingkatPendidikanController extends Controller
     public function index()
     {
         $page_title       = 'Tingkat Pendidikan';
-        $page_description = 'Data Tingkat Pendidikan ' . $this->sebutan_wilayah. ' ' .$this->nama_wilayah;
+        $page_description = 'Data Tingkat Pendidikan';
         return view('data.tingkat_pendidikan.index', compact('page_title', 'page_description'));
     }
 

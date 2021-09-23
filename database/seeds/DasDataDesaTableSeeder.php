@@ -16,7 +16,7 @@ class DasDataDesaTableSeeder extends Seeder
     public function run()
     {
         $kecamatan_id = config('app.default_profile');
-        $desa         = Wilayah::getDesaByKecamatan($kecamatan_id)->get();
+        $desa         = null; //Wilayah::getDesaByKecamatan($kecamatan_id)->get();
         $collection   = collect($desa);
         $collection->shift();
 

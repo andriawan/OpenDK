@@ -66,7 +66,7 @@ class ImunisasiController extends Controller
     public function index()
     {
         $page_title       = 'Imunisasi';
-        $page_description = 'Data Cakupan Imunisasi ' . $this->sebutan_wilayah. ' ' .$this->nama_wilayah;
+        $page_description = 'Data Cakupan Imunisasi';
         return view('data.imunisasi.index', compact('page_title', 'page_description'));
     }
 

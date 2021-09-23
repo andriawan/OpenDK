@@ -12,12 +12,13 @@ class DasProfilTableSeeder extends Seeder
      */
     public function run()
     {
-        $kecamatan_id = config('app.default_profile');
-
         DB::table('das_profil')->insert([
             'provinsi_id'                     => substr($kecamatan_id, 0, 2),
+            'nama_provinsi'                   => 'Nusa Tenggara Timur',
             'kabupaten_id'                    => substr($kecamatan_id, 0, 5),
+            'nama_kabupaten'                  => 'Flores Timur',
             'kecamatan_id'                    => $kecamatan_id,
+            'nama_kecamatan'                  => 'Ile Boleng',
             'alamat'                          => null,
             'kode_pos'                        => null,
             'telepon'                         => null,

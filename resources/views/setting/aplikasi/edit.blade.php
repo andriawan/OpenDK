@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('setting.aplikasi.index')}}">Setting Aplikasi</a></li>
-        <li class="active">{{$page_title}}</li>
+        <li class="active">{{ $page_title }}</li>
     </ol>
 </section>
 

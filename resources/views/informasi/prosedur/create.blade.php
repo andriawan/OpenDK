@@ -1,7 +1,7 @@
 @extends('layouts.dashboard_template')
 
 @section('content')
-        <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         {{ $page_title ?? "Page Title" }}
@@ -9,7 +9,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('informasi.prosedur.index')}}">Kumpulan Prosedur</a></li>
+        <li><a href="{{route('informasi.prosedur.index')}}">Daftar Prosedur</a></li>
         <li class="active">Tambah</li>
     </ol>
 </section>

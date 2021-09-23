@@ -40,7 +40,12 @@ class Profil extends Model
     protected $table = 'das_profil';
 
     protected $fillable = [
+        'provinsi_id',
+        'nama_provinsi',
+        'kabupaten_id',
+        'nama_kabupaten',
         'kecamatan_id',
+        'nama_kecamatan',
         'alamat',
         'kode_pos',
         'telepon',
@@ -66,21 +71,6 @@ class Profil extends Model
     protected $cast = [
         'socialmedia' => 'array'
     ];
-
-    public function kecamatan()
-    {
-        return $this->hasOne(Wilayah::class, 'kode', 'kecamatan_id');
-    }
-
-    public function kabupaten()
-    {
-        return $this->hasOne(Wilayah::class, 'kode', 'kabupaten_id');
-    }
-
-    public function provinsi()
-    {
-        return $this->hasOne(Wilayah::class, 'kode', 'provinsi_id');
-    }
 
     public static function getProfilTanpaDataUmum()
     {

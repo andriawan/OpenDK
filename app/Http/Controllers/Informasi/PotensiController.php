@@ -40,7 +40,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use function redirect;
 use function request;
 use function view;
@@ -55,8 +54,8 @@ class PotensiController extends Controller
     public function index()
     {
         $page_title       = 'Potensi';
-        $page_description = 'Potensi-Potensi ' .$this->sebutan_wilayah;
-        $potensis         = DB::table('das_potensi')->simplePaginate(10);
+        $page_description = 'Daftar Potensi';
+        $potensis         = Potensi::latest()->paginate(10);
 
         return view('informasi.potensi.index', compact(['page_title', 'page_description', 'potensis']));
     }
@@ -69,11 +68,12 @@ class PotensiController extends Controller
     public function kategori()
     {
         $page_title       = 'Potensi';
-        $page_description = 'Potensi-Potensi ' .$this->sebutan_wilayah;
+        $page_description = 'Potensi-Potensi';
+
         if ($_GET['id'] != null) {
-            $potensis = DB::table('das_potensi')->where('kategori_id', $_GET['id'])->simplePaginate(10);
+            $potensis = Potensi::where('kategori_id', $_GET['id'])->latest()->paginate(10);
         } else {
-            $potensis = DB::table('das_potensi')->simplePaginate(10);
+            $potensis = Potensi::latest()->paginate(10);
         }
 
         return view('informasi.potensi.index', compact(['page_title', 'page_description', 'potensis']));

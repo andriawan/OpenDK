@@ -35,7 +35,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Regulasi;
 use function back;
 use function compact;
-use function config;
 
 use Exception;
 use Illuminate\Http\Request;
@@ -54,7 +53,7 @@ class RegulasiController extends Controller
     public function index()
     {
         $page_title       = 'Regulasi';
-        $page_description = 'Kumpulan Regulasi ' .$this->sebutan_wilayah;
+        $page_description = 'Daftar Regulasi';
         $regulasi         = Regulasi::orderBy('id', 'asc')->paginate(10);
 
         return view('informasi.regulasi.index', compact('page_title', 'page_description', 'regulasi'));
@@ -67,8 +66,8 @@ class RegulasiController extends Controller
      */
     public function create()
     {
-        $page_title       = 'Tambah';
-        $page_description = 'Tambah baru Regulasi '.$this->sebutan_wilayah;
+        $page_title       = 'Regulasi';
+        $page_description = 'Tambah Data';
 
         return view('informasi.regulasi.create', compact('page_title', 'page_description'));
     }
@@ -82,7 +81,6 @@ class RegulasiController extends Controller
     {
         try {
             request()->validate([
-                //'kecamatan_id' => 'required|integer',
                 'tipe_regulasi' => 'required',
                 'judul'         => 'required',
                 'deskripsi'     => 'required',
@@ -90,7 +88,7 @@ class RegulasiController extends Controller
             ]);
 
             $regulasi               = new Regulasi($request->input());
-            $regulasi->kecamatan_id = config('app.default_profile');
+            $regulasi->kecamatan_id = $this->profil->kecamatan_id;
 
             if ($request->hasFile('file_regulasi')) {
                 $lampiran1 = $request->file('file_regulasi');

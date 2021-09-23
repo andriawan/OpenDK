@@ -1,8 +1,10 @@
+// TODO : Belum digunakan
+
 @extends('layouts.dashboard_template')
 
 
 @section('content')
-        <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         {{ $page_title ?? "Page Title" }}
@@ -10,7 +12,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">{{$page_title}}</li>
+        <li class="active">{{ $page_title }}</li>
     </ol>
 </section>
 
@@ -21,8 +23,8 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="">
-               {{-- <a href="{{ route('data.profil.create') }}">
-                    <button type="button" class="btn btn-primary btn-sm" title="Tambah Data"><i class="fa fa-plus"></i> Tambah Profil</button>
+                {{-- <a href="{{ route('data.profil.create') }}">
+                    <button type="button" class="btn btn-primary btn-sm" title="Tambah Data"><i class="fa fa-plus"></i> Tambah Data</button>
                 </a>--}}
             </div>
         </div>
@@ -58,8 +60,8 @@
             ajax: "{!! route( 'data.profil.getdata' ) !!}",
             columns: [
                 {data: 'action', name: 'action', class: 'text-center', searchable: false, orderable: false},
-                {data: 'kecamatan.id', name: 'id'},
-                {data: 'kecamatan.nama', name: 'kecamatan'},
+                {data: 'kecamatan_id', name: 'kecamatan_id'},
+                {data: 'nama_kecamatan', name: 'nama_kecamatan'},
                /* {data: 'kabupaten.nama', name: 'kabupaten'},
                 {data: 'provinsi.nama', name: 'provinsi'},*/
                 {data: 'nama_camat', name: 'nama_camat'},

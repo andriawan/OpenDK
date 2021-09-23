@@ -53,7 +53,7 @@ class EventController extends Controller
     public function index()
     {
         $page_title       = 'Event';
-        $page_description = 'Kumpulan Event ' .$this->sebutan_wilayah;
+        $page_description = 'Daftar Event';
         $events           = Event::getOpenEvents();
 
         return view('informasi.event.index', compact('page_title', 'page_description', 'events'));

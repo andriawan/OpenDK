@@ -33,8 +33,8 @@
     <div class="login-box-body">
         <div class="login-logo" style="padding-top: 10px;">
             <a href="{{ route('beranda') }}">
-                <img class="" src="@if(isset($profil_wilayah->file_logo)) {{  asset($profil_wilayah->file_logo) }} @else {{   asset('img/logo.png')}}@endif" style="max-width:80px;white-space:normal" alt=""  width="70px">
-                <h3>PEMERINTAH {{ strtoupper($nama_wilayah_kab) }}<br/><b>{{ strtoupper($sebutan_wilayah.' '.$nama_wilayah) }}</b></h3>
+                <img class="" src="@if(isset($profil->file_logo)) {{  asset($profil->file_logo) }} @else {{   asset('img/logo.png')}}@endif" style="max-width:80px;white-space:normal" alt=""  width="70px">
+                <h3>PEMERINTAH {{ strtoupper($profil->nama_kabupaten) }}<br/><b>{{ strtoupper($sebutan_wilayah.' '.$profil->nama_kecamatan) }}</b></h3>
             </a>
         </div>
         <hr/>

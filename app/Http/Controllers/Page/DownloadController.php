@@ -56,7 +56,7 @@ class DownloadController extends Controller
         Counter::count('unduhan.prosedur');
 
         $page_title       = 'Prosedur';
-        $page_description = 'Kumpulan SOP Kecamatan';
+        $page_description = 'Daftar SOP Kecamatan';
         $prosedurs        = Prosedur::latest()->paginate(10);
 
         return view('pages.unduhan.prosedur', compact(['page_title', 'page_description', 'prosedurs']))
@@ -95,7 +95,7 @@ class DownloadController extends Controller
         Counter::count('unduhan.regulasi');
 
         $page_title       = 'Regulasi';
-        $page_description = 'Kumpulan regulasi Kecamatan';
+        $page_description = 'Daftar regulasi Kecamatan';
         $regulasi         = Regulasi::orderBy('id', 'asc')->paginate(10);
 
         $defaultProfil = config('app.default_profile');
@@ -123,7 +123,7 @@ class DownloadController extends Controller
         Counter::count('unduhan.form-dokumen');
 
         $page_title       = 'Dokumen';
-        $page_description = 'Kumpulan Formulir Dokumen';
+        $page_description = 'Daftar Formulir Dokumen';
         return view('pages.unduhan.form-dokumen', compact('page_title', 'page_description'));
     }
 

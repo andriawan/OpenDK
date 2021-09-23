@@ -1,12 +1,30 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ $sebutan_wilayah }} <span
-                        class="required">*</span></label>
-
+            <label class="control-label col-md-4 col-sm-3 col-xs-12">Provinsi <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                {!! Form::text('nama_kecamatan', $profil->kecamatan->nama,['placeholder'=> 'Nama '.$sebutan_wilayah, 'class'=>'form-control', 'readonly'=>true]) !!}
-                {!! Form::hidden('kecamatan_id', $profil->kecamatan_id,['placeholder'=>'Nama '.$sebutan_wilayah, 'class'=>'form-control', 'readonly'=>true]) !!}
+                <select class="form-control" id="list_provinsi" name="provinsi_id">
+                    <option value="">Pilih Provinsi</option>
+                </select>
+                {!! Form::text('nama_provinsi', $profil->nama_provinsi, ['id' => 'nama_provinsi', 'class' => 'form-control', 'readonly' => true]) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-3 col-xs-12">Kabupaten <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select class="form-control" id="list_kabupaten" name="kabupaten_id">
+                    <option value="">Pilih Kabupaten</option>
+                </select>
+                {!! Form::text('nama_kabupaten', $profil->nama_kabupaten, ['id' => 'nama_kabupaten', 'class' => 'form-control', 'readonly' => true]) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ $sebutan_wilayah }} <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {!! Form::text('nama_kecamatan', $profil->nama_kecamatan, ['placeholder'=> 'Nama '.$sebutan_wilayah, 'class'=>'form-control']) !!}
+                {!! Form::hidden('kecamatan_id', $profil->kecamatan_id, ['placeholder'=>'Kode ' . $sebutan_wilayah, 'class'=>'form-control', 'readonly'=>true]) !!}
             </div>
         </div>
         <div class="form-group">
@@ -66,7 +84,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Sambutan {{ $sebutan_kepala_wilayah }}</label>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    {!! Form::textarea('sambutan', null,['class'=>'textarea', 'placeholder'=>'Sambutan '.$sebutan_kepala_wilayah. ' ' .$nama_wilayah .'', 'style'=>'width: 100%;
+                    {!! Form::textarea('sambutan', null,['class'=>'textarea', 'placeholder'=>'Sambutan '.$sebutan_kepala_wilayah. ' ' .$profil->nama_kecamatan .'', 'style'=>'width: 100%;
                     height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;']) !!}
             </div>
         </div>

@@ -118,7 +118,7 @@ class PageController extends Controller
     {
         $kategoriPotensi  = DB::table('das_tipe_potensi')->where('slug', $slug)->first();
         $page_title       = 'Potensi';
-        $page_description = 'Potensi-Potensi ' .$this->sebutan_wilayah;
+        $page_description = 'Potensi-Potensi';
 
         $potensis = DB::table('das_potensi')->where('kategori_id', $kategoriPotensi->id)->simplePaginate(10);
 

@@ -601,19 +601,15 @@ Route::group(['middleware' => 'installed'], function () {
     })->name('api.desa-by-kid');
 
     // All Profil Select2
-    // Route::get('/api/profil', function () {
-    //     return DB::table('das_profil')
-    //         ->join('ref_wilayah', 'das_profil.kecamatan_id', '=', 'ref_wilayah.kode')
-    //         ->select('ref_wilayah.kode', 'ref_kecamatan.nama')
-    //         ->where('ref_wilayah.nama', 'LIKE', '%' . strtoupper(request('q')) . '%')
-    //         ->paginate(10);
-    // })->name('api.profil');
+    Route::get('/api/profil', function () {
+        return Profil::select('kecamatan_id', 'nama_kecamatan')
+            ->where('nama_kecamatan', 'LIKE', '%' . strtoupper(request('q')) . '%')
+            ->paginate(10);
+    })->name('api.profil');
 
     // Profil By id
     Route::get('/api/profil-byid', function () {
-        return DB::table('das_profil')
-            ->join('ref_kecamatan', 'das_profil.kecamatan_id', '=', 'ref_kecamatan.id')
-            ->select('ref_kecamatan.id', 'ref_kecamatan.nama')
+        return Profil::select('kecamatan_id', 'nama_kecamatan')
             ->where('ref_kecamatan.id', '=', request('id'))->get();
     })->name('api.profil-byid');
 

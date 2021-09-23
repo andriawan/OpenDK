@@ -53,7 +53,7 @@ class FasilitasPaudController extends Controller
     public function index()
     {
         $page_title       = 'Fasilitas PAUD';
-        $page_description = 'Data Fasilitas PAUD ' . $this->sebutan_wilayah. ' ' .$this->nama_wilayah;
+        $page_description = 'Data Fasilitas PAUD';
         return view('data.fasilitas_paud.index', compact('page_title', 'page_description'));
     }
 

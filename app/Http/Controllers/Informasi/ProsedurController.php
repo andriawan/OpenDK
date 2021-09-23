@@ -56,11 +56,10 @@ class ProsedurController extends Controller
     public function index()
     {
         $page_title       = 'Prosedur';
-        $page_description = 'Kumpulan SOP ' .$this->sebutan_wilayah;
+        $page_description = 'Daftar Prosedur';
         $prosedurs        = Prosedur::latest()->paginate(10);
 
-        return view('informasi.prosedur.index', compact(['page_title', 'page_description', 'prosedurs']))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('informasi.prosedur.index', compact(['page_title', 'page_description', 'prosedurs']));
     }
 
     /**
