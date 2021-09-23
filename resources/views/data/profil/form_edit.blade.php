@@ -3,28 +3,30 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Provinsi <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="list_provinsi" name="provinsi_id">
+                <select class="form-control" id="list_provinsi" name="provinsi_id" required>
                     <option value="">Pilih Provinsi</option>
                 </select>
-                {!! Form::text('nama_provinsi', $profil->nama_provinsi, ['id' => 'nama_provinsi', 'class' => 'form-control', 'readonly' => true]) !!}
+                {!! Form::hidden('nama_provinsi', $profil->nama_provinsi, ['id' => 'nama_provinsi', 'class' => 'form-control', 'readonly' => true]) !!}
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Kabupaten <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="list_kabupaten" name="kabupaten_id">
+                <select class="form-control" id="list_kabupaten" name="kabupaten_id" disabled required>
                     <option value="">Pilih Kabupaten</option>
                 </select>
-                {!! Form::text('nama_kabupaten', $profil->nama_kabupaten, ['id' => 'nama_kabupaten', 'class' => 'form-control', 'readonly' => true]) !!}
+                {!! Form::hidden('nama_kabupaten', $profil->nama_kabupaten, ['id' => 'nama_kabupaten', 'class' => 'form-control', 'readonly' => true]) !!}
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">{{ $sebutan_wilayah }} <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                {!! Form::text('nama_kecamatan', $profil->nama_kecamatan, ['placeholder'=> 'Nama '.$sebutan_wilayah, 'class'=>'form-control']) !!}
-                {!! Form::hidden('kecamatan_id', $profil->kecamatan_id, ['placeholder'=>'Kode ' . $sebutan_wilayah, 'class'=>'form-control', 'readonly'=>true]) !!}
+                <select class="form-control" id="list_kecamatan" name="kecamatan_id" disabled required>
+                    <option value="">Pilih {{ $sebutan_wilayah }}</option>
+                </select>
+                {!! Form::hidden('nama_kecamatan', $profil->nama_kecamatan, ['id' => 'nama_kecamatan', 'class' => 'form-control', 'readonly' => true]) !!}
             </div>
         </div>
         <div class="form-group">

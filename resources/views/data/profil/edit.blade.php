@@ -74,13 +74,12 @@
 <script>
     $(function () {
 
-        const tracker_host = 'http://localhost:8080/track';
-        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6bnVsbCwidGltZXN0YW1wIjoxNjAzNDY2MjM5fQ.HVCNnMLokF2tgHwjQhSIYo6-2GNXB4-Kf28FSIeXnZw';
+        const host = '<?= config('app.host_pantau'); ?>';
+        const token = '<?= config('app.token_pantau'); ?>';
 
-        $('#list_provinsi').select2();
         $.ajax({
             type: 'GET',
-            url: tracker_host + '/index.php/api/wilayah/list_wilayah?token=' + token,
+            url: host + '/index.php/api/wilayah/list_wilayah?token=' + token,
             dataType: 'json',
             success: function(data) {
                 var html = '';
@@ -91,18 +90,16 @@
                 $('#list_provinsi').html(html);
             }
         });
+        $('#list_provinsi').select2();
 
-        $('#list_kabupaten').select2();
         $("#list_provinsi").change(function () {
 
-            var provinsi = $('#list_provinsi').data('nama');
+            provinsi = $('#list_provinsi option:selected').data('nama');
             $('#nama_provinsi').val(provinsi);
-
-            alert(provinsi);
 
             $.ajax({
                 type: 'GET',
-                url: tracker_host + '/index.php/api/wilayah/list_wilayah?token=' + token + '&provinsi=' + provinsi,
+                url: host + '/index.php/api/wilayah/list_wilayah?token=' + token + '&provinsi=' + provinsi,
                 dataType: 'json',
                 success: function(data) {
                     var html = '';
@@ -111,19 +108,20 @@
                         html += '<option value="' + data[i].kode_kab + '" data-nama="' + data[i].nama_kab + '">'+data[i].nama_kab + '</option>';
                     }
                     $('#list_kabupaten').html(html);
+                    $('#list_kabupaten').removeAttr("disabled");
                 }
             });
         });
+        $('#list_kabupaten').select2();
 
-        $('#list_kecamatan').select2();
         $("#list_kabupaten").change(function () {
 
-            var kabupaten = $('#list_kabupaten').data('nama');
+            kabupaten = $('#list_kabupaten option:selected').data('nama');
             $('#nama_kabupaten').val(kabupaten);
 
             $.ajax({
                 type: 'GET',
-                url: tracker_host + '/index.php/api/wilayah/list_wilayah?token=' + token + '&provinsi=' + provinsi,
+                url: host + '/index.php/api/wilayah/list_wilayah?token=' + token + '&provinsi=' + provinsi + '&kabupaten=' + kabupaten,
                 dataType: 'json',
                 success: function(data) {
                     var html = '';
@@ -132,8 +130,15 @@
                         html += '<option value="' + data[i].kode_kec + '"data-nama="' + data[i].nama_kec + '">'+data[i].nama_kec + '</option>';
                     }
                     $('#list_kecamatan').html(html);
+                    $('#list_kecamatan').removeAttr("disabled");
                 }
             });
+        });
+        $('#list_kecamatan').select2();
+
+        $("#list_kecamatan").change(function () {
+            var provinsi = $('#list_kecamatan option:selected').data('nama');
+            $('#nama_kecamatan').val(provinsi);
         });
 
         function readURL(input) {
